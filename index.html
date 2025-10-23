@@ -52,7 +52,7 @@
   }
 
   /* Hide Elfsight player completely */
-  .elfsight-app-bdab7848-46ab-4feb-8d28-e6e5ce731a05 {
+  #audioPlayer {
     display: none !important;
   }
 </style>
@@ -62,16 +62,16 @@
 <!-- Splash Page -->
 <div id="splash" class="fullscreen">
   <img src="https://raw.githubusercontent.com/prophetmind25-dotcom/kira-role-card/refs/heads/main/Touch%20To%20Reveal%20Your%20Fate.png" alt="Touch to Reveal Your Fate">
+
+  <!-- Elfsight Audio Player (hidden) -->
+  <script src="https://elfsightcdn.com/platform.js" async></script>
+  <div id="audioPlayer" class="elfsight-app-bdab7848-46ab-4feb-8d28-e6e5ce731a05" data-elfsight-app-lazy></div>
 </div>
 
 <!-- Role Card Page -->
 <div id="roleCard" class="fullscreen">
   <img src="https://raw.githubusercontent.com/prophetmind25-dotcom/kira-role-card/760a4201f7f557fefbb404cc8f59ab630ecc3cf1/Kira%20Role%20Card.png" alt="Kira Role Card">
 </div>
-
-<!-- Elfsight Audio Player -->
-<script src="https://elfsightcdn.com/platform.js" async></script>
-<div id="audioPlayer" class="elfsight-app-bdab7848-46ab-4feb-8d28-e6e5ce731a05" data-elfsight-app-lazy></div>
 
 <script>
   const splash = document.getElementById('splash');
