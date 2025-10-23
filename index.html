@@ -47,15 +47,6 @@
   #splash {
     cursor: pointer;
   }
-
-  /* Hide the Elfsight audio player */
-  .elfsight-app-bdab7848-46ab-4feb-8d28-e6e5ce731a05 {
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    position: absolute;
-    top: -9999px;
-  }
 </style>
 </head>
 <body>
@@ -68,22 +59,32 @@
 <!-- Role Card Page -->
 <div id="roleCard" class="fullscreen">
   <img src="https://raw.githubusercontent.com/prophetmind25-dotcom/kira-role-card/760a4201f7f557fefbb404cc8f59ab630ecc3cf1/Kira%20Role%20Card.png" alt="Kira Role Card">
-  
-  <!-- Elfsight Audio Player -->
-  <script src="https://elfsightcdn.com/platform.js" async></script>
-  <div class="elfsight-app-bdab7848-46ab-4feb-8d28-e6e5ce731a05" data-elfsight-app-lazy></div>
 </div>
+
+<!-- Audio (hidden, triggered on first tap) -->
+<audio id="roleAudio" loop>
+  <source src="YOUR_AUDIO_FILE_URL_HERE.mp3" type="audio/mpeg">
+</audio>
 
 <script>
   const splash = document.getElementById('splash');
   const roleCard = document.getElementById('roleCard');
+  const audio = document.getElementById('roleAudio');
+  let audioStarted = false;
 
   splash.addEventListener('click', () => {
     // Fade out splash
     splash.style.opacity = 0; 
     setTimeout(() => { splash.style.display = 'none'; }, 1000); 
+
     // Fade in role card
     roleCard.classList.add('show'); 
+
+    // Start audio on first touch
+    if (!audioStarted) {
+      audioStarted = true;
+      audio.play();
+    }
   });
 </script>
 
