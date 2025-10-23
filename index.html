@@ -23,13 +23,16 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    opacity: 0;
     transition: opacity 1s ease;
   }
 
+  .fullscreen.show {
+    opacity: 1;
+  }
+
   #roleCard {
-    opacity: 0;
     pointer-events: none;
-    flex-direction: column;
   }
 
   #roleCard.show {
@@ -47,6 +50,11 @@
   #splash {
     cursor: pointer;
   }
+
+  /* Hide Elfsight player completely */
+  .elfsight-app-bdab7848-46ab-4feb-8d28-e6e5ce731a05 {
+    display: none !important;
+  }
 </style>
 </head>
 <body>
@@ -61,29 +69,31 @@
   <img src="https://raw.githubusercontent.com/prophetmind25-dotcom/kira-role-card/760a4201f7f557fefbb404cc8f59ab630ecc3cf1/Kira%20Role%20Card.png" alt="Kira Role Card">
 </div>
 
-<!-- Audio (hidden, triggered on first tap) -->
-<audio id="roleAudio" loop>
-  <source src="YOUR_AUDIO_FILE_URL_HERE.mp3" type="audio/mpeg">
-</audio>
+<!-- Elfsight Audio Player -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div id="audioPlayer" class="elfsight-app-bdab7848-46ab-4feb-8d28-e6e5ce731a05" data-elfsight-app-lazy></div>
 
 <script>
   const splash = document.getElementById('splash');
   const roleCard = document.getElementById('roleCard');
-  const audio = document.getElementById('roleAudio');
-  let audioStarted = false;
+
+  // Fade in splash page on load
+  window.addEventListener('load', () => {
+    splash.classList.add('show');
+  });
 
   splash.addEventListener('click', () => {
     // Fade out splash
-    splash.style.opacity = 0; 
-    setTimeout(() => { splash.style.display = 'none'; }, 1000); 
+    splash.style.opacity = 0;
+    setTimeout(() => { splash.style.display = 'none'; }, 1000);
 
     // Fade in role card
-    roleCard.classList.add('show'); 
+    roleCard.classList.add('show');
 
-    // Start audio on first touch
-    if (!audioStarted) {
-      audioStarted = true;
-      audio.play();
+    // Trigger Elfsight audio to start playing
+    const iframe = document.querySelector('#audioPlayer iframe');
+    if (iframe) {
+      iframe.contentWindow.postMessage('play', '*');
     }
   });
 </script>
